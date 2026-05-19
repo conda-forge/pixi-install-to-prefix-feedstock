@@ -1,5 +1,5 @@
 context:
-  version: "0.1.4"
+  version: "0.1.5"
 
 package:
   name: pixi-install-to-prefix
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/pavelzw/pixi-install-to-prefix/archive/v${{ version }}.tar.gz
-  sha256: 7d7a382fce6e892e9edada77a477b15a3b2a4165e9f7c4256d591d033645d640
+  sha256: d5cf5b22b4928709c4db28473d21896b4bf5c42dfb7e19ddcce721a65d4aff44
 
 build:
   number: 0
