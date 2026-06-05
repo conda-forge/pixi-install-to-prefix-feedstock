@@ -1,5 +1,5 @@
 context:
-  version: "0.1.5"
+  version: "0.1.6"
 
 package:
   name: pixi-install-to-prefix
@@ -7,12 +7,15 @@ package:
 
 source:
   url: https://github.com/pavelzw/pixi-install-to-prefix/archive/v${{ version }}.tar.gz
-  sha256: d5cf5b22b4928709c4db28473d21896b4bf5c42dfb7e19ddcce721a65d4aff44
+  sha256: b27ad07b46ce4fb9358211d8c0b61aad261cdd40ee3538beadb39544d6bc3cbd
 
 build:
   number: 0
   script:
     env:
+      # Use cmake to build aws-lc-sys, because conda's CFLAGS inject -O2 which
+      # overrides the -O0 required by jitterentropy-base.c, causing a build failure.
+      AWS_LC_SYS_CMAKE_BUILDER: "1"
       CARGO_PROFILE_RELEASE_STRIP: symbols
       CARGO_PROFILE_RELEASE_LTO: fat
     content:
@@ -33,6 +36,8 @@ requirements:
     - ${{ compiler('rust') }}
     - cargo-bundle-licenses
     - cargo-auditable
+    - cmake
+    - make
   host:
     - if: linux
       then:
